@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="./css/signup.css">
+  <script src="./js/signup.js"></script>
+</head>
+<body>
+<div id="clouds">
+    <div class="cloud x1"></div>
+    <!-- Time for multiple clouds to dance around -->
+    <div class="cloud x2"></div>
+    <div class="cloud x3"></div>
+    <div class="cloud x4"></div>
+    <div class="cloud x5"></div>
+</div>
+
+ <div class="container">
+
+
+    <div id="login">
+
+        <form method="get" action="homepage.html">
+
+        <!-- <fieldset class="clearfix"> -->
+
+            <p><span class="fontawesome-user"></span><input id="personUsername" type="text" value="Username" onBlur="if(this.value == '') this.value = 'Username'" onFocus="if(this.value == 'Username') this.value = ''" required></p> <!-- JS because of IE support; better: placeholder="Username" -->
+            <p><span class="fontawesome-lock"></span><input id="personPassword" type="password"  value="Password" onBlur="if(this.value == '') this.value = 'Password'" onFocus="if(this.value == 'Password') this.value = ''" required></p> <!-- JS because of IE support; better: placeholder="Password" -->
+            <p><span class="fontawesome-location"></span><input id="personLocation" type="location"  value="Location" onBlur="if(this.value == '') this.value = 'Location'" onFocus="if(this.value == 'Location') this.value = ''" required></p> <!-- JS because of IE support; better: placeholder="Location" -->
+            <p><input type="submit" value="Sign Up" onclick="submitPerson()"></p>
+
+          <!-- </fieldset> -->
+
+        </form>
+
+      <p>Already a member? <a href="index.html" class="blue">Sign in now</a><span class="fontawesome-arrow-right"></span></p>
+
+    </div> <!-- end login -->
+
+  </div>
+    </body>
+</html>

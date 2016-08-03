@@ -1,0 +1,82 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link href="Weather%20Recommendation_files/css.css" rel="stylesheet" type="text/css">
+  <link href="Weather%20Recommendation_files/css_003.css" rel="stylesheet" type="text/css">
+  <link href="Weather%20Recommendation_files/css_002.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" type="text/css" href="Weather%20Recommendation_files/weather3.css">
+  <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+  <title>Weather Recommendation</title>
+  <script>
+  // function myFunction(arr) {
+  //   var out = "";
+  //   var i;
+  //   for(i = 0; i < arr.length; i++) {
+  //       out += '<a href="' + arr[i].url + '">' + arr[i].display + '</a><br>';
+  //   }
+  //   document.getElementById("id01").innerHTML = out;
+  // }
+  function getWeather(){
+  var cityName= document.getElementById("cityInput").value;
+  var countryName= document.getElementById("countryInput").value;
+  var requestString = "http://api.openweathermap.org/data/2.5/weather?q="+
+                      cityName + 
+                      "," + 
+                      countryName + 
+                      "&APPID=3ea6bbfd39598831a1c3884abaa09a34";                      
+                        
+    request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+      if (request.readyState == 4 && request.status == 200) {
+          var myArr = JSON.parse(request.responseText);
+          console.log(myArr);
+          console.log(myArr.name);
+          console.log(myArr.main.temp_max);
+          var temperature = myArr.main.temp;
+          var desc = myArr.weather[0].description;
+          var result = document.getElementById("id01");
+          var result2 = document.getElementById("id02");
+          var farenheit_temp = Math.round((temperature*1.8)-459.67)
+          result.innerHTML="It is " + farenheit_temp +" degrees Farenheit outside.";
+          result2.innerHTML="Sky: " + desc;
+
+            if (farenheit_temp > 50) {
+              alert("Hi");
+            }
+
+
+          //myFunction(myArr);
+          }
+    };
+
+    request.open("get", requestString, true);
+    request.send();
+
+
+
+  } 
+  
+  </script>
+</head>
+<body>
+  <div id="clouds">
+    <div class="cloud x1"></div>
+    <!-- Time for multiple clouds to dance around -->
+    <div class="cloud x2"></div>
+    <div class="cloud x3"></div>
+    <div class="cloud x4"></div>
+    <div class="cloud x5"></div>
+</div>
+      <center><input value="palo Alto " id="cityInput" placeholder="Enter a City" type="text"></center>    
+      <center><input value="usa" id="countryInput" placeholder="Enter a Country" type="text"></center>      
+      <center><input id="submitWeather" onclick="getWeather()" type="submit"></center>
+      <center><p id="id01">It is 64 degrees Farenheit outside.</p></center>
+      <center><p id="id02">Sky: mist</p></center>
+
+      <div class="back-button">
+                <a href="file:///Users/gwc/Desktop/Clothing%20Weather/www/homepage.html"><img src="Weather%20Recommendation_files/backarrow.png" alt="back"></a>
+            </div>    
+
+</body></html>

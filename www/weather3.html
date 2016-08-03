@@ -1,0 +1,77 @@
+<html>
+<head>
+  <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="./css/weather3.css">
+  <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+	<title>Get Weather</title>
+  <script>
+  // function myFunction(arr) {
+  //   var out = "";
+  //   var i;
+  //   for(i = 0; i < arr.length; i++) {
+  //       out += '<a href="' + arr[i].url + '">' + arr[i].display + '</a><br>';
+  //   }
+  //   document.getElementById("id01").innerHTML = out;
+  // }
+  function getWeather(){
+  var cityName= document.getElementById("cityInput").value;
+  var countryName= document.getElementById("countryInput").value;
+  var requestString = "http://api.openweathermap.org/data/2.5/weather?q="+
+                      cityName + 
+                      "," + 
+                      countryName + 
+                      "&APPID=3ea6bbfd39598831a1c3884abaa09a34";                      
+                        
+    request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+      if (request.readyState == 4 && request.status == 200) {
+          var myArr = JSON.parse(request.responseText);
+          console.log(myArr);
+          console.log(myArr.name);
+          console.log(myArr.main.temp_max);
+          var temperature = myArr.main.temp;
+          var desc = myArr.weather[0].description;
+          var result = document.getElementById("id01");
+          var result2 = document.getElementById("id02")
+          result.innerHTML="It is " + Math.round((temperature*1.8)-459.67)+" degrees Farenheit outside.";
+          result2.innerHTML="Sky: " + desc;
+
+
+          //myFunction(myArr);
+          }
+    };
+
+    request.open("get", requestString, true);
+    request.send();
+    
+  }
+
+  } 
+  
+  </script>
+</head>
+<body>
+  <div id="clouds">
+    <div class="cloud x1"></div>
+    <!-- Time for multiple clouds to dance around -->
+    <div class="cloud x2"></div>
+    <div class="cloud x3"></div>
+    <div class="cloud x4"></div>
+    <div class="cloud x5"></div>
+</div>
+   		<center><input type="text" id="cityInput" placeholder="Enter a City" /></center>		
+    	<center><input type="text" id="countryInput" placeholder="Enter a Country" /></center>	 		
+    	<center><input type="submit" id="submitWeather" onclick="getWeather()"></center>
+      <center><p id="id01"></p></center>
+      <center><p id="id02"></p></center>
+
+      <div class="back-button">
+                <a href="homepage.html"><img src="backarrow.png" alt="back"></a>
+            </div>    
+</body>
+</html>
